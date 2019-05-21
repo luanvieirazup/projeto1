@@ -2,7 +2,7 @@ function initTabNav () {
     const tabMenu = document.querySelectorAll('.js-tabMenu li');
     const tabContent = document.querySelectorAll('.js-tabContent section');
     const activeClass = 'ativo';
-      
+
     tabContent[0].classList.add(activeClass);
     
     if (tabMenu.length && tabContent.length) {
@@ -41,3 +41,29 @@ function initAccordion () {
     }
 }
 initAccordion();
+
+function initScrollSuave() {
+    const linksInternos = document.querySelectorAll('.js-menu a[href^="#"]');
+    
+    function scrollToSection(event) {
+        event.preventDefault();
+        const href = event.currentTarget.getAttribute('href');
+        const section = document.querySelector(href);
+    
+        // section.scrollIntoView({
+        //     behavior: 'smooth' ,
+        //     block: 'start',
+        // });
+    
+        const topo = section.offsetTop;
+        window.scrollTo({
+            top: topo,
+            behavior: 'smooth',
+        });
+    }
+    
+    linksInternos.forEach((link) => {
+        link.addEventListener('click',  scrollToSection);
+    });
+}
+initScrollSuave();
